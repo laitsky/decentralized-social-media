@@ -1,6 +1,8 @@
 import { ColorModeScript } from '@chakra-ui/react';
 import React, { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
+import ReactDOM from 'react-dom';
+import { Buffer } from 'buffer';
+import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
@@ -8,13 +10,20 @@ import { initApp } from './utils';
 
 window.nearInitPromise = initApp()
   .then(() => {
-    const root = createRoot(document.getElementById('root'));
-    root.render(
+    global.Buffer = Buffer;
+    //const root = createRoot(document.getElementById('root'));
+    ReactDOM.render(
       <StrictMode>
-        <ColorModeScript />
+      <ColorModeScript />
+      <BrowserRouter>
         <App />
-      </StrictMode>
+      </BrowserRouter>
+    </StrictMode>,
+    document.getElementById('root')
     )
+    // root.render(
+
+    // )
   })
   .catch(console.error);
 

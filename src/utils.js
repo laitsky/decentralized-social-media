@@ -1,5 +1,6 @@
 import * as nearAPI from 'near-api-js';
 import { getConfig } from './config';
+import { Web3Storage } from 'web3.storage';
 
 const nearConfig = getConfig('development');
 
@@ -28,7 +29,9 @@ export async function initApp() {
         'get_user_followers_list',
         'get_user_followers_count',
         'get_all_posts',
-        'get_single_post'
+        'get_single_post',
+        'get_post_likes_details',
+        'get_post_comment_details'
       ],
       changeMethods: [
         'create_account',
@@ -48,5 +51,13 @@ export function login() {
 
 export function logout() {
   window.walletConnection.signOut();
-  window.location.reload();
+  window.location.href = '/';
+}
+
+function getAccessToken() {
+  return process.env.REACT_APP_WEB3STORAGE_TOKEN;
+}
+
+export function makeStorageClient() {
+  return new Web3Storage({ token: getAccessToken() });
 }

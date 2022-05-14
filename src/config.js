@@ -5,7 +5,6 @@ const CONTRACT_NAME_TESTNET = 'x.dao-sosmed.testnet';
 
 export function getConfig(env) {
   switch (env) {
-
     case 'production':
     case 'mainnet':
       return {
