@@ -30,6 +30,7 @@ export async function initApp() {
         'get_user_followers_count',
         'get_all_posts',
         'get_single_post',
+        'get_user_posts',
         'get_post_likes_details',
         'get_post_comment_details'
       ],
@@ -40,6 +41,8 @@ export async function initApp() {
         'create_post',
         'like_post',
         'comment_on_post',
+        'edit_account_details',
+        'edit_profile_image',
       ]
     }
   );
@@ -60,4 +63,8 @@ function getAccessToken() {
 
 export function makeStorageClient() {
   return new Web3Storage({ token: getAccessToken() });
+}
+
+export function IPFSGateway(cid) {
+  return `https://cloudflare-ipfs.com/ipfs/${cid}`
 }

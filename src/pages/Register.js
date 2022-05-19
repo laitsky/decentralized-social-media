@@ -69,7 +69,7 @@ export default function Register() {
   return (
     <Box>
       <Container>
-        <VStack>
+        <VStack spacing="6px">
           <Center>
             <Heading pt={12} pb={8}>Daftar Akun</Heading>
           </Center>
@@ -79,10 +79,11 @@ export default function Register() {
             <Input placeholder='Deskripsi diri anda (opsional)' {...register("description")} />
             <label htmlFor="file">Pilih gambar untuk profile picture</label> <hr />
             <input type="file" id="input" name="file" ref={(ref) => setFile(ref)} />
-            <Button isLoading={isLoading} mt={8} type="submit">Daftar</Button>
+            <Box mt={3} mb={2}/>
+            <Button isLoading={isLoading} mr={3} type="submit" colorScheme="blue">Daftar</Button>
+            <Button onClick={logout} colorScheme="blue" variant="outline">Batal</Button>
           </form>
         </VStack>
-        <Button mt={4} onClick={logout}>Batal</Button>
       </Container>
     </Box>
   )

@@ -2,3 +2,7 @@ button.link {
   background: none;
   border: none;
 }
+
+button.link::hover {
+  background: red;
+}

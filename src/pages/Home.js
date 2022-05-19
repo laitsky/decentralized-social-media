@@ -16,6 +16,8 @@ import {
   Text,
 } from "@chakra-ui/react";
 
+import { IPFSGateway } from '../utils';
+
 import { CreatePostForm, PostContainer } from '../components/posts';
 
 export default function Home() {
@@ -26,7 +28,7 @@ export default function Home() {
   const [modalContent, setModalContent] = useState([]);
   const [modalType, setModalType] = useState('');
   const [commentInputArr, setCommentInputArr] = useState([]);
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
     isUserExist();
@@ -107,10 +109,10 @@ export default function Home() {
     if (modalType === 'pl') {
       return (
         modalContent.map(c => (
-          <Box key={c.user_address} display="flex" flexDirection="row" alignItems="center">
+          <Box key={c.user_address} display="flex" flexDirection="row" alignItems="center" mb={3}>
             <Avatar
               size="sm"
-              src={c.profile_image_url.length !== 0 ? `https://cloudflare-ipfs.com/ipfs/${c.profile_image_url}` : ''}
+              src={c.profile_image_url.length !== 0 ? IPFSGateway(c.profile_image_url) : ''}
             />
             <Heading ml={2} size="xs">{c.user_address}</Heading>
           </Box>
@@ -124,7 +126,7 @@ export default function Home() {
               <Box key={c.user_address} display="flex" flexDirection="row" alignItems="center">
                 <Avatar
                   size="sm"
-                  src={c.profile_image_url.length !== 0 ? `https://cloudflare-ipfs.com/ipfs/${c.profile_image_url}` : ''}
+                  src={c.profile_image_url.length !== 0 ? IPFSGateway(c.profile_image_url) : ''}
                 />
                 <Heading ml={2} size="xs">{c.user_address}</Heading>
               </Box>

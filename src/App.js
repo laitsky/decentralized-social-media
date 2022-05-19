@@ -4,7 +4,6 @@ import {
   theme,
   Box,
   Container,
-  Text,
   Avatar,
   AvatarBadge,
   Button,
@@ -12,11 +11,10 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
-  MenuDivider,
+  Link,
+  Text,
 } from '@chakra-ui/react';
+import { IoHome, IoHomeSharp } from 'react-icons/io5';
 import { 
   Routes,
   Route,
@@ -28,8 +26,9 @@ import Login from './pages/Login';
 import Home from './pages/Home';
 import Register from './pages/Register';
 import Profile from './pages/Profile';
+import Account from './pages/Account';
 
-import { logout } from './utils';
+import { IPFSGateway, logout } from './utils';
 
 function App() {
   const location = useLocation();
@@ -38,12 +37,12 @@ function App() {
   const [avatar, setAvatar] = useState('');
 
   useEffect(() => {
-    getAccountDetails();
+    getLoggedProfileImage();
   }, []);
 
-  const getAccountDetails = async () => {
+  const getLoggedProfileImage = async () => {
     const accountDetails = await window.contract.get_account_details({ address: window.accountID });
-    const profileImageUrl = `https://cloudflare-ipfs.com/ipfs/${accountDetails.profile_image_url}`;
+    const profileImageUrl = IPFSGateway(accountDetails.profile_image_url);
     setAvatar(profileImageUrl);
   }
 
@@ -56,10 +55,17 @@ function App() {
       path === '/' ||
       path === '/register'
     ) {
-      return ;
+      return;
     }
+
     return (
-      <Box display="flex" flexDirection="row" justifyContent="flex-end" alignItems="center">
+      <Box display="flex" flexDirection="row" justifyContent="space-between" alignItems="center" boxShadow="base" padding={4} borderRadius={6} mb={3}>
+        <Link onClick={() => navigate('../home')}>
+          <Box display="flex" flexDirection="row" alignItems="center">
+            <IoHomeSharp />
+            <Text ml={1}>Home</Text>
+          </Box>
+        </Link>
         <Menu>
           <MenuButton as={Button} backgroundColor="transparent">
             <Avatar size="md" mr={2} src={avatar.length !== 0 ? avatar : ''} showBorder="true">
@@ -67,8 +73,8 @@ function App() {
             </Avatar> 
           </MenuButton>
           <MenuList>
-            <MenuItem onClick={() => navigate('../profile')}>Profile</MenuItem>
-            <MenuItem>Account</MenuItem>
+            <MenuItem onClick={() => navigate('../profile/' + window.accountID)}>Profile</MenuItem>
+            <MenuItem onClick={() => navigate('../account')}>Account</MenuItem>
             <MenuItem onClick={logout}>Logout</MenuItem>
           </MenuList>
         </Menu>
@@ -85,7 +91,8 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="/home" element={<Home />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile/:accountId" element={<Profile />} />
+          <Route path="/account" element={<Account />} />
         </Routes>
         </Container>
       </Box>
