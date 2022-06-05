@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { 
+import {
   Box, 
   Button, 
   Heading,
@@ -14,49 +13,32 @@ import {
   useDisclosure,
   Avatar,
   Text,
-} from "@chakra-ui/react";
-import { CreatePostForm, PostContainer } from '../components/posts';
+} from '@chakra-ui/react';
+
+import { PostContainer } from '../components/posts';
 
 import { IPFSGateway } from '../utils';
 
-export default function Home() {
-  const navigate = useNavigate();
-  const [isExist, setIsExist] = useState();
+export default function Explore() {
   const [posts, setPosts] = useState([]);
-  const [inputValue, setInputValue] = useState('');
   const [modalContent, setModalContent] = useState([]);
   const [modalType, setModalType] = useState('');
   const [commentInputArr, setCommentInputArr] = useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
-    isUserExist();
-    if (!window.walletConnection.isSignedIn()) {
-      navigate('../')
-    }
     getAllPosts();
   }, []);
-
-  useEffect(() => {
-    if (isExist === false) {
-      navigate('../')
-    }
-  }, [isExist]);
-
-  const isUserExist = async () => {
-    const isUserExist = await window.contract.is_user_exists({ address: window.accountID });
-    setIsExist(isUserExist);
-  }
-
+  
   const getAllPosts = async () => {
-    const res = await window.contract.get_all_posts_personalized({ account_id: window.accountID });
+    const res = await window.contract.get_all_posts({ account_id: window.accountID });
     setPosts(res);
   }
 
   const handleLikeBtnClick = async (postId) => {
     await window.contract.like_post({ post_id: +postId });
   }
-
+  
   const handleShowAllPostLikes = (postId) => async () => {
     setModalType('pl');
     const res = await window.contract.get_post_likes_details({ post_id: +postId });
@@ -69,15 +51,6 @@ export default function Home() {
     const res = await window.contract.get_post_comment_details({ post_id: +postId });
     setModalContent(res);
     onOpen();
-  }
-
-  const handlePostFormInputChange = (e) => {
-    setInputValue(e.target.value);
-  }
-
-  const handlePostFormSubmit = async () => {
-    setInputValue('');
-    await window.contract.create_post({ content: inputValue });
   }
 
   const handleCommentInputChange = (index) => (e) => {
@@ -153,12 +126,7 @@ export default function Home() {
           </ModalFooter>
         </ModalContent>
       </Modal>
-      <Heading size="lg" pb={4}>Home</Heading>
-      <CreatePostForm
-        value={inputValue}
-        handleInputChange={handlePostFormInputChange}
-        handleSubmit={handlePostFormSubmit}
-      />
+      <Heading size="lg" pb={4}>Explore</Heading>
       {posts.map((post, index) => (
         <PostContainer
           key={post.post.post_id}

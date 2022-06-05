@@ -19,6 +19,7 @@ export const PostContainer = ({
   handleLikeBtnClick,
   handleShowAllPostLikes,
   handleCommentBtnClick,
+  postId,
   username,
   profileImageUrl,
   date,
@@ -34,17 +35,19 @@ export const PostContainer = ({
 
   return (
     <Box backgroundColor="gray.100" display="flex" flexDirection="column" padding={4} borderRadius={6} mt={3} mb={3}>
-      <Box display="flex" flexDirection="row" justifyContent="space-between" alignItems="center" pb={4}>
-        <Box display="flex" flexDirection="row" alignItems="center">
-          <Avatar
-            size="sm" 
-            src={profileImageUrl.length !== 0 ? IPFSGateway(profileImageUrl) : ''}
-          />
-          <Heading ml={2} size="xs"><Link onClick={() => {navigate('../profile/' + username)}}>{username}</Link></Heading>
+      <Box className="click-box" onClick={() => navigate('../post/' + postId)}>
+        <Box display="flex" flexDirection="row" justifyContent="space-between" alignItems="center" pb={4}>
+          <Box display="flex" flexDirection="row" alignItems="center">
+            <Avatar
+              size="sm" 
+              src={profileImageUrl.length !== 0 ? IPFSGateway(profileImageUrl) : ''}
+            />
+            <Heading ml={2} size="xs"><Link onClick={() => {navigate('../profile/' + username)}}>{username}</Link></Heading>
+          </Box>
+          <Text fontSize="xs">{date}</Text>
         </Box>
-        <Text fontSize="xs">{date}</Text>
+        <Text pb={6}>{content}</Text>
       </Box>
-      <Text pb={6}>{content}</Text>
       <Box display="flex" flexDirection="row" justifyContent="flex-start" alignItems="center">
         <Text fontSize="xs">
           <IconButton size="sm" ml={-2} icon={<CgHeart color={isLiked ? "red" : ""} />} onClick={handleLikeBtnClick} />

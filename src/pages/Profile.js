@@ -9,7 +9,6 @@ import {
   TabList,
   TabPanels,
   Tab,
-  TabPanel,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -25,7 +24,7 @@ import {
   IoLinkOutline,
   IoCalendarOutline
 } from 'react-icons/io5'
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link as RRLink } from 'react-router-dom';
 
 import { PostContainer } from '../components/posts';
 
@@ -42,7 +41,7 @@ export default function Profile() {
   const [modalType, setModalType] = useState('');
   const { accountId } = useParams();
   const navigate = useNavigate();
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
     getAccountDetails();
@@ -62,7 +61,7 @@ export default function Profile() {
   }
 
   const getUserPosts = async () => {
-    const userPosts = await window.contract.get_user_posts({ account_id: accountId });
+    const userPosts = await window.contract.get_user_posts({ account_id: accountId, perspective: window.accountID });
     setPosts(userPosts.reverse());
   }
 
@@ -90,19 +89,19 @@ export default function Profile() {
   }
 
   const handleLikeBtnClick = async (postId) => {
-    await window.contract.like_post({ post_id: postId });
+    await window.contract.like_post({ post_id: +postId });
   }
 
   const handleShowAllPostLikes = (postId) => async () => {
     setModalType('pl');
-    const res = await window.contract.get_post_likes_details({ post_id: postId });
+    const res = await window.contract.get_post_likes_details({ post_id: +postId });
     setModalContent(res);
     onOpen();
   }
 
   const handleCommentBtnClick = (postId) => async () => {
     setModalType('pc');
-    const res = await window.contract.get_post_comment_details({ post_id: postId });
+    const res = await window.contract.get_post_comment_details({ post_id: +postId });
     setModalContent(res);
     onOpen();
   }
@@ -118,7 +117,7 @@ export default function Profile() {
       return;
     }
     await window.contract.comment_on_post({
-      post_id: postId,
+      post_id: +postId,
       comment: commentInputArr[index]
     });
   }
@@ -214,25 +213,22 @@ export default function Profile() {
           </Text>
         </Box>
         <Box flexDirection="row"  mt={4}>
-          <Link mr={3}>{following.length} followings</Link>
-          <Link>{followers.length} followers</Link>
+          <Link mr={3} as={RRLink} to={`/profile/${accountId}/following`} >{following.length} followings</Link>
+          <Link as={RRLink} to={`/profile/${accountId}/followers`}  >{followers.length} followers</Link>
         </Box>
       </Box>
       <Tabs isFitted isLazy variant="soft-rounded" colorScheme="blue" mt={4}>
       <TabList>
-        <Tab>Posts</Tab>
-        <Tab>Replies</Tab>
-        <Tab>Likes</Tab>
+        <Tab>Your Posts</Tab>
       </TabList>
-
       <TabPanels>
-        <TabPanel>
         {posts.map((post, index) => (
           <PostContainer
             key={post.post.post_id}
             handleLikeBtnClick={() => handleLikeBtnClick(post.post.post_id)}
             handleShowAllPostLikes={handleShowAllPostLikes(post.post.post_id)}
             handleCommentBtnClick={handleCommentBtnClick(post.post.post_id)}
+            postId={post.post.post_id}
             username={post.post.user_address}
             profileImageUrl={post.profile_image_url}
             date={new Date(post.post.created_at / 1_000_000).toLocaleString()}
@@ -245,13 +241,6 @@ export default function Profile() {
             handleCommentSubmit={handleCommentSubmit(post.post.post_id, index)}
           />
         ))}
-        </TabPanel>
-        <TabPanel>
-          <p>two!</p>
-        </TabPanel>
-        <TabPanel>
-          <p>three!</p>
-        </TabPanel>
       </TabPanels>
     </Tabs>
     </Box>

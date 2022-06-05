@@ -25,10 +25,9 @@ export async function initApp() {
         'get_account_details',
         'is_user_followed',
         'get_user_following_list',
-        'get_user_following_count',
         'get_user_followers_list',
-        'get_user_followers_count',
         'get_all_posts',
+        'get_all_posts_personalized',
         'get_single_post',
         'get_user_posts',
         'get_post_likes_details',
@@ -37,7 +36,6 @@ export async function initApp() {
       changeMethods: [
         'create_account',
         'follow_user',
-        'unfollow_user',
         'create_post',
         'like_post',
         'comment_on_post',
@@ -66,5 +64,5 @@ export function makeStorageClient() {
 }
 
 export function IPFSGateway(cid) {
-  return `https://cloudflare-ipfs.com/ipfs/${cid}`
+  return `https://dweb.link/ipfs/${cid}`
 }

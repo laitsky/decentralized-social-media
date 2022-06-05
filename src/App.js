@@ -14,7 +14,7 @@ import {
   Link,
   Text,
 } from '@chakra-ui/react';
-import { IoHome, IoHomeSharp } from 'react-icons/io5';
+import { IoHomeSharp, IoCompassSharp } from 'react-icons/io5';
 import { 
   Routes,
   Route,
@@ -24,9 +24,12 @@ import {
 
 import Login from './pages/Login';
 import Home from './pages/Home';
+import Explore from './pages/Explore';
 import Register from './pages/Register';
 import Profile from './pages/Profile';
 import Account from './pages/Account';
+import FollowList from './pages/FollowList';
+import PostDetail from './pages/PostDetail';
 
 import { IPFSGateway, logout } from './utils';
 
@@ -66,6 +69,12 @@ function App() {
             <Text ml={1}>Home</Text>
           </Box>
         </Link>
+        <Link onClick={() => navigate('../explore')}>
+          <Box display="flex" flexDirection="row" alignItems="center">
+            <IoCompassSharp />
+            <Text ml={1}>Explore</Text>
+          </Box>
+        </Link>
         <Menu>
           <MenuButton as={Button} backgroundColor="transparent">
             <Avatar size="md" mr={2} src={avatar.length !== 0 ? avatar : ''} showBorder="true">
@@ -90,9 +99,13 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/explore" element={<Explore />} />
           <Route path="/register" element={<Register />} />
           <Route path="/profile/:accountId" element={<Profile />} />
           <Route path="/account" element={<Account />} />
+          <Route path="/profile/:accountId/followers" element={<FollowList />} />
+          <Route path="/profile/:accountId/following" element={<FollowList />} />
+          <Route path="/post/:postId" element={<PostDetail />} />
         </Routes>
         </Container>
       </Box>

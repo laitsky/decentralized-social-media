@@ -3,6 +3,7 @@ button.link {
   border: none;
 }
 
-button.link::hover {
-  background: red;
+
+.click-box:hover {
+  cursor: pointer;
 }
