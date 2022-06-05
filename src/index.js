@@ -11,7 +11,6 @@ import { initApp } from './utils';
 window.nearInitPromise = initApp()
   .then(() => {
     global.Buffer = Buffer;
-    //const root = createRoot(document.getElementById('root'));
     ReactDOM.render(
       <StrictMode>
       <ColorModeScript />
@@ -21,9 +20,6 @@ window.nearInitPromise = initApp()
     </StrictMode>,
     document.getElementById('root')
     )
-    // root.render(
-
-    // )
   })
   .catch(console.error);
 
