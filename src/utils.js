@@ -2,7 +2,7 @@ import * as nearAPI from 'near-api-js';
 import { getConfig } from './config';
 import { Web3Storage } from 'web3.storage';
 
-const nearConfig = getConfig('development');
+const nearConfig = getConfig('mainnet');
 
 // Initialize connection to NEAR contract and set global variables
 export async function initApp() {

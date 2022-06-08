@@ -167,7 +167,7 @@ export default function Profile() {
   const showProfileButton = () => {
     if (accountId === window.accountID) {
       return <Button colorScheme="blue" variant="outline" onClick={() => navigate('../account')}>Edit Profile</Button>
-    } else if (isFollowed === 0) {
+    } else if (typeof(isFollowed) == 'number') {
       return <Button colorScheme="blue" onClick={followUser} variant="outline">Unfollow</Button>
     } else if (isFollowed === null) {
       return <Button colorScheme="blue" onClick={followUser}>Follow</Button>
@@ -219,7 +219,7 @@ export default function Profile() {
       </Box>
       <Tabs isFitted isLazy variant="soft-rounded" colorScheme="blue" mt={4}>
       <TabList>
-        <Tab>Your Posts</Tab>
+        <Tab>Posts</Tab>
       </TabList>
       <TabPanels>
         {posts.map((post, index) => (
