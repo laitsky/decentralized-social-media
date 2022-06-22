@@ -1,5 +1,8 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Decentralized Social Media
+Fully on-chain Twitter-like social media built with on NEAR Protocol and NEAR Rust SDK, deployed on mainnet.
+[Contract repos](https://github.com/laitsky/near-sosmed-contracts/tree/main/main-contract)
 ## Available Scripts
 
 In the project directory, you can run:
