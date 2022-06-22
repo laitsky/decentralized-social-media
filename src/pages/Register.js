@@ -71,17 +71,17 @@ export default function Register() {
       <Container>
         <VStack spacing="6px">
           <Center>
-            <Heading pt={12} pb={8}>Daftar Akun</Heading>
+            <Heading pt={12} pb={8}>Register</Heading>
           </Center>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <Input placeholder='Nama (opsional)' {...register("name")} />
-            <Input placeholder='Lokasi (opsional)' {...register("location")} />
-            <Input placeholder='Deskripsi diri anda (opsional)' {...register("description")} />
-            <label htmlFor="file">Pilih gambar untuk profile picture</label> <hr />
+            <Input placeholder='Name (optional)' {...register("name")} />
+            <Input placeholder='Location (optional)' {...register("location")} />
+            <Input placeholder='Bio (optional)' {...register("description")} />
+            <label htmlFor="file">Pick image for profile picture</label> <hr />
             <input type="file" id="input" name="file" ref={(ref) => setFile(ref)} />
             <Box mt={3} mb={2}/>
-            <Button isLoading={isLoading} mr={3} type="submit" colorScheme="blue">Daftar</Button>
-            <Button onClick={logout} colorScheme="blue" variant="outline">Batal</Button>
+            <Button isLoading={isLoading} mr={3} type="submit" colorScheme="blue">Register</Button>
+            <Button onClick={logout} colorScheme="blue" variant="outline">Cancel</Button>
           </form>
         </VStack>
       </Container>

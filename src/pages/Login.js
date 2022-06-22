@@ -34,8 +34,8 @@ export default function Login() {
       <Container>
         <Center>
           <VStack>
-            <Heading pt={12}>DAO Sosial Media</Heading>
-            <Button colorScheme='blue' onClick={handleLogin}>Masuk</Button>
+            <Heading pt={12}>Social Media DAO</Heading>
+            <Button colorScheme='blue' onClick={handleLogin}>Login</Button>
           </VStack>
         </Center>
       </Container>
