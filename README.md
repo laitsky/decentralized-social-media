@@ -15,6 +15,11 @@ Home:
 
 [![home-ui.png](https://i.postimg.cc/fTCNpsJq/home-ui.png)](https://postimg.cc/GH4VTZPv)
 
+Explore:
+
+[![explore.png](https://i.postimg.cc/nhNwwSYw/explore.png)](https://postimg.cc/ZWFcWcQr)
+
+
 ## Available Scripts
 
 In the project directory, you can run:
