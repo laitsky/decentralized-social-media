@@ -12,7 +12,8 @@ Available features of this application is written on the smart contract repo.
 Some screenshots of the existing app:
 
 Home:
-[![home-ui.png](https://i.postimg.cc/yYcJZkpg/home-ui.png)](https://postimg.cc/1fR5x5Qs)
+
+[![home-ui.png](https://i.postimg.cc/fTCNpsJq/home-ui.png)](https://postimg.cc/GH4VTZPv)
 
 ## Available Scripts
 
