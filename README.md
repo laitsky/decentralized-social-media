@@ -17,7 +17,23 @@ Home:
 
 Explore:
 
-[![explore.png](https://i.postimg.cc/nhNwwSYw/explore.png)](https://postimg.cc/ZWFcWcQr)
+[![explore.png](https://i.postimg.cc/rFQBg9Pv/explore.png)](https://postimg.cc/GHTgmvrQ)
+
+Post details:
+
+[![post-detail.png](https://i.postimg.cc/rFHkMJN5/post-detail.png)](https://postimg.cc/F70qx0qK)
+
+My profile:
+
+[![my-profile.png](https://i.postimg.cc/RC8ffrM8/my-profile.png)](https://postimg.cc/grVnFTLq)
+
+Account settings:
+
+[![account.png](https://i.postimg.cc/yYcP86Fn/account.png)](https://postimg.cc/zVDWdr2R)
+
+Following:
+
+[![following.png](https://i.postimg.cc/k4yCCPT5/following.png)](https://postimg.cc/9RzKPK53)
 
 
 ## Available Scripts
