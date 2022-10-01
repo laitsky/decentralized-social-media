@@ -3,7 +3,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Decentralized Social Media
 Fully on-chain Twitter-like social media built with on NEAR Protocol and NEAR Rust SDK, deployed on mainnet.
 
-**Click [here](sosmed-client.vercel.app/) to visit deployed app.**
+**Click [here](sosmed-client.vercel.app/) to visit deployed app. (mainnet)**
 
 **Smart contract repository could be visited through this [link](https://github.com/laitsky/near-sosmed-contracts/tree/main/main-contract)**
 
